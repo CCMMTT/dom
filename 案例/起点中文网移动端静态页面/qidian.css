@@ -1,0 +1,380 @@
+body{
+	margin:0;
+	padding:0;
+	font-size: 0.16rem;
+	background-color:#ddd;
+}
+
+.bigbox{
+   width:100%;
+}
+.top{
+	width:94%;
+    overflow: hidden;
+	margin:0 auto;
+	margin-bottom:.1rem;
+}
+.topleft{
+	float: left;
+	font-size: 0.14rem;
+	margin:0.1rem 0 .1rem;
+}
+.topsz{
+	font-size:.35rem;
+}
+
+.topzi{
+	display:inline-block;
+	border:0.01rem solid red;
+	padding: 0.08rem 0px;
+	border-radius:0.05rem;
+	margin-left:.3rem;
+	font-size:.2rem;
+}
+
+.topzi span:first-of-type{
+	background-color: red;
+	padding:0.08rem 0.1rem;
+}
+.topzi span:last-of-type{
+  padding: 0.08rem 0.1rem;
+  margin-left:-.05rem;
+}
+
+.topright{
+	float: right;
+}
+.ren{
+	margin:.2rem 0 0.1rem;
+	width: .3rem;
+	height:.3rem;
+	fill:red;
+	font-size:.14rem;
+	margin-right: 0.1rem;
+}
+.shu{
+	margin:.2rem 0 .1rem;
+	width:.3rem;
+	height:.3rem;
+	fill:red;
+	
+}
+
+/* 轮播图 */
+ul{
+	list-style: none;
+	padding: 0;
+	margin:0;
+}
+.rbt{
+	visibility: visible;
+	position: relative;
+	overflow: hidden;
+	height:calc(.320 * (100vw - 1.5rem));
+	margin:0 0.25rem;
+	margin-bottom:.2rem;
+}
+
+.rbtimg{
+  position: absolute;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+ white-space: nowrap;
+ 
+}
+
+.rbtimg li{
+	position: relative;
+	display: inline-block;
+	width:100%;
+	height:100%;
+    vertical-align: top;
+}
+
+img{
+	width:100%;
+	display: block;
+}
+
+/* 搜索框 */
+.k{
+	width:.3rem;
+	height:.3rem;
+	margin-bottom:-.05rem;
+	fill:#bbb;
+}
+
+.ssk{
+	width:94%;
+	background-color:#fff;
+	margin:.1rem auto 0;
+	text-align: center;
+	padding:.18rem 0;
+	color:#bbb;
+	font-size: .3rem;
+	margin-bottom:.2rem;
+}
+/* 选项 */
+.xx{
+	width:100%;
+	height:1.8rem;
+	background-color: #fff;
+	margin-top:.1rem;
+}
+.xxtubox{
+    padding-top:.5rem;
+	width: 94%;
+	overflow: hidden;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right:0;
+	margin:auto;
+}
+
+.xxtubox li{
+	float: left;
+	width: 20%;
+    text-align: center;
+}
+.i{
+	display: block;
+	content: '';
+	width: 24px;
+	height:24px;
+	margin:0 auto;
+	background: url(./images/duo.png);
+    margin-bottom:0.14rem;
+}
+
+.a{
+	background-position:24px -28px; 
+	background-size:87px 87px; 
+}
+.b{
+    background-position:0 0; 
+	background-size:82px 82px; 
+}
+.c{
+    background-position:0 52px; 
+	background-size:80px 80px; 
+}
+.d{
+	background-position:0 24px; 
+	background-size:80px 80px; 
+}
+.f{
+	background-position:52px 52px; 
+	background-size:80px 80px; 
+}
+/* 图片 */
+
+.tu{
+	width: 90%;
+	margin:.3rem auto;
+}
+/* 热门小说 */
+.rmxs-box{
+	width:100%;
+	background-color:#fff;
+	padding:.3rem 0 .2rem;
+}
+.xs{
+	content: '';
+	display:inline-block;
+	width: .04rem;
+	height:.3rem;
+	background-color:red;
+}
+.rmxs{
+  width:90%;
+  margin:0 auto;
+  font-size:.3rem;
+}
+.rmxs>.rmxs-zi{
+	color:#aaa;
+	font-size:0.25rem;
+}
+
+/* 图片 */
+p{
+	padding:0;
+	margin:0;
+}
+.bigtu{
+	width:100%;
+	background-color: #fff;
+	padding:0 0 .2rem;
+	margin-bottom:.2rem;
+}
+.bigtu>.tu{
+	width:90%;
+	margin:0 auto;
+	overflow: hidden;
+}
+.bigtu>.tu li{
+	float: left;
+	width:22%;
+	margin-right:4%;
+}
+.bigtu>.tu li p:nth-of-type(1){
+	font-size:.25rem;
+	margin:.1rem 0;
+
+}
+.bigtu>.tu li p:nth-of-type(2){
+	color:#aaa;
+}
+.bigtu>.tu li:nth-last-of-type(1){
+	margin-right:0;
+}
+.bigtu>.tu .tuzi{
+	text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+/* 1 */
+.yunzi{
+	width:90%;
+	margin:0 auto;
+	overflow: hidden;
+}
+.yunzi span:nth-of-type(1){
+	float: left;
+	width:45%;
+	font-size:.25rem;
+    text-align: center;
+	border:.02rem solid #ED525B;
+	border-radius: .4rem;
+	margin:.3rem .1rem;
+	padding:.1rem 0;
+	color:#ED525B;
+}
+.yunzi span:nth-of-type(2){
+	float: right;
+	width:45%;
+	font-size:.25rem;
+    text-align: center;
+	border:.02rem solid #ED525B;
+	border-radius: .4rem;
+	margin:.3rem .1rem;
+	padding:.1rem 0;
+	color:#ED525B;
+}
+/* 2 */
+.big-xsmf{
+	width:100%;
+	background-color: #fff;
+	
+}
+.xsmf{
+	width:90%;
+	margin:0 auto;
+  overflow: hidden;
+  padding:.2rem 0;
+
+}
+.xsleft{
+	float: left;
+}
+.xsmf .i{
+	content: '';
+	width:.04rem;
+	height:.4rem;
+	display: inline-block;
+	background-color: red;
+	margin-bottom:-.04rem;
+}
+.xsleft .zi{
+	font-size:.33rem;
+	margin-right:.1rem;
+}
+.xsleft .a{
+	display: inline-block;
+	width:.3rem;
+	height:.3rem;
+	background-color: #000;
+	color:#fff;
+}
+.xsleft .b{
+	display: inline-block;
+	width:.3rem;
+	height:.3rem;
+	background-color: red;
+	color:#fff;
+}
+.xsright{
+	float: right;
+}
+.xsright .zi{
+	font-size:.33rem;
+}
+.xsright #ic{
+	width:.25rem;
+	height:.25rem;
+	display: inline-block;
+    text-align: center;
+}
+/* 5 */
+.big-phb{
+	width:100%;
+	background-color: #fff;
+   padding-bottom:.2rem;
+}
+.big-phb .phb li{
+	float: left;
+	list-style: none;
+	width: 25%;
+	border-right: .03rem solid #ED525B;
+	box-sizing: border-box;
+	padding:.1rem 0;
+}	
+.big-phb .phb li:nth-of-type(4){
+	border-right:0;
+}
+
+.big-phb .phb{
+	width:90%;
+	margin:0 auto;
+	border:.03rem solid #ED525B;
+	overflow: hidden;
+	text-align: center;
+	border-radius: .1rem;
+}
+/* xinshu */
+.big-xinshu{
+	width:100%;
+	background-color: #fff;
+}
+.xinshu{
+	width:90%;
+	margin:0 auto;
+   overflow: hidden;
+   position: relative;
+}
+.xinshu .left{
+	float: left;
+	width: 30%;
+}
+.xinshu .right{
+	
+	width:68%;
+	float: right;
+}
+.xinshu .right .a{
+	font-size:.3rem
+}
+.xinshu .right .b{
+	margin-top:.1rem;
+}
+.xinshu .right .c{
+	position: absolute;
+	bottom:0;
+	margin-bottom:.1rem;
+}
+.xinshu .right .ca{
+
+	font-size:.25rem;
+}

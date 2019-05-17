@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+	<title>Document</title>
+</head>
+<style>
+	.box{
+    width:300px;
+    height:300px;
+    background:  url("img/aa.jpg") no-repeat;
+    background-size:cover;
+    margin:200px 200px 0;
+    position: relative;
+}
+.minbox{
+    width:80px;
+    height:80px;
+    background-color: rgba(0,0,0,0.5);
+    position: absolute;
+    z-index: 1;
+}
+.clik{
+    width:300px;
+    height:300px;
+    position: absolute;
+    z-index: 2;
+}
+.bigbox{
+    position: absolute;
+    top: 200px;
+    right:235px;
+    width:300px;
+    height:300px;
+    /*display: none;*/
+}
+</style>
+<body>
+	    <div id="box" class="box">
+        <div id= "minbox" class="minbox"></div>
+        <div id="clik" class="clik"></div>
+    </div>
+    <div id="bigbox" class="bigbox"></div>
+</body>
+<script src="jquery-3.3.1.min.js"></script>
+<script>
+	
+	$('#clik').on('mousemove',function(e){
+		$('.bigbox').css({
+			display:'block'
+		})
+	var bw = $('#box').width();
+	var bh = $('#box').height();
+	var mw = $('#minbox').width();
+	var mh = $('#minbox').height();
+	var cw = $('#clik').width();
+	var ch = $('#clik').height();
+	var bbw = $('#bigbox').width();
+	var bbh = $('#bigbox').height();
+	var x = e.offsetX;
+	var y = e.offsetY;
+	var left = x - (mw/2);
+	var top = y - (mh/2);
+	var leftmax = cw - mw;
+	var topmax = ch - mh;
+	var leftmin = 0;
+	var topmin = 0;
+	
+	//移动
+	if(left>=leftmin&&left<=leftmax){
+		$('#minbox').css({
+		left:left + 'px'
+	});
+	};
+	
+	if(top>=topmin&&top<=topmax){
+		$('#minbox').css({
+		top:top + 'px'
+	});
+	};
+	
+	//放大
+	$('#bigbox').css({
+		background:'url("img/aa.jpg")',
+		backgroundSize:'cover'
+	});
+	
+	var xz = cw/mw*bbw;
+	var yz = ch/mh*bbh;
+	console.log(xz,yz);
+	$('#bigbox').css({
+		backgroundSize:xz + "px "+ yz + "px"
+	});
+	
+	var lefta = bbw / mw * -left;
+	var topa = bbh / mh * -top;
+	$('#bigbox').css({
+		backgroundPosition: lefta + 'px ' + topa + 'px'
+	});
+	})
+	
+	$('#clik').on('mouseout',function(){
+		console.log("a");
+		$('.bigbox').css({
+			display:'none'
+		})
+	})
+	
+</script>
+</html>

@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<style>
+		body{
+			padding:0;
+			margin:0;
+		}
+		.box{
+			position: relative;
+			width:100%;
+		}
+		canvas{
+			background: #ddd;
+			margin:20px auto;
+			display: block;
+		}
+		#btn{
+			width:100px;
+			height:50px;
+			background-color: #ccc;
+			border-radius: 10px;
+			display: block;
+			outline: none;
+			margin:0 auto;
+		}
+		#newbtn{
+			position: absolute;
+			right:0;
+			left:0;
+			top:0;
+			bottom:0;
+			width:100px;
+			height:50px;
+			background-color: #aaa;
+			border-radius: 10px;
+			margin:auto;
+			display: none;
+			outline: none;
+		}
+		.fen{
+			margin-left:40px;
+			font-weight: bold;
+		}
+	</style>
+	<body>
+		<div class="box">
+			<canvas id="can" width="1000" height="600"></canvas>
+		<button id="btn">开始</button>
+		<button id="newbtn">重新开始</button>
+		<div class="fen">分数：<span id="fen">0</span></div>
+		</div>
+		
+	</body>
+	
+	<script>
+		var canva = document.getElementById("can");
+		var context = canva.getContext("2d");
+		var btn = document.getElementById("btn");
+		var newbtn = document.getElementById("newbtn");
+		var fen = document.getElementById("fen");
+		var a = false;
+		//实例化游戏对象
+		var tcs = new Tcs({
+			width:canva.width,
+			height:canva.height,
+			space:20,
+			context:context
+		})
+		//传入参数
+		function Tcs(e){
+			this.width = e.width;
+			this.height = e.height;
+			this.space = e.space;
+			this.colCount = this.width/this.space;
+			this.rowCount = this.height/this.space;
+			this.direction = 'right';
+			this.timer = null;
+			this.context = e.context;
+		}
+		//绘制地图
+		Tcs.prototype.dt = function(){
+			this.context.strokeStyle = "#333";
+			for(var i=0;i<=this.colCount;i++){
+				this.context.moveTo(0,i*this.space);
+				this.context.lineTo(this.width,i*this.space);
+				this.context.moveTo(i*this.space,0);
+				this.context.lineTo(i*this.space,this.height);
+				this.context.stroke();
+			}
+		}
+		//绘制蛇
+		Tcs.prototype.tcsst = function(){
+			//初始化蛇的位置
+			this.snake = [
+			{x:0,y:0,color:'blue'},
+			{x:20,y:0,color:"blue"},
+			{x:40,y:0,color:'yellow'}
+			]
+			//开始绘制
+			for(var j = 0 ; j<this.snake.length;j++){
+				this.context.beginPath();
+				this.context.fillStyle = this.snake[j].color;
+				this.context.fillRect(this.snake[j].x,this.snake[j].y,this.space,this.space);
+				this.context.fill();
+			}
+		}
+        //初始化食物的位置
+        Tcs.prototype.food = function(){
+        	//位置
+        	this.foo = {
+        		x:80,
+        		y:80,
+        		color:"red"
+        	}
+        	//开始绘制
+        	this.context.beginPath();
+        	this.context.fillStyle = this.foo.color;
+        	this.context.fillRect(this.foo.x,this.foo.y,this.space,this.space);
+        	this.context.fill();
+        }
+        //监听按下事件
+        Tcs.prototype.keydown = function(){
+        	var self = this;
+        	document.onkeydown = function(e){
+        		var keyd = e.keyCode;
+            if(keyd==38 && self.direction != 'down'){
+            	self.direction = 'up' 
+            }
+            if(keyd==40 && self.direction != 'up'){
+            	self.direction = 'down'
+            } 
+            if(keyd==37 && self.direction != 'right'){
+            	self.direction = 'left'
+            } 
+            if(keyd==39 && self.direction != 'left'){
+            	self.direction = 'right'
+            }
+        	}
+        }
+        //按下改反向并移动
+        Tcs.prototype.move = function(){
+        	this.x=0;
+        	this.y=0;
+        	if(this.direction == 'right'){
+				this.x = this.space;
+			}
+			if(this.direction == 'left'){
+				this.x = -this.space;
+			}
+			if(this.direction == 'down'){
+				this.y = this.space
+			}
+			if(this.direction == 'up'){
+				this.y = -this.space;
+			}
+        	//设置除蛇头外的格子向前一个
+        	for(var i = 0 ; i < this.snake.length - 1; i++){
+		 		this.snake[i].x = this.snake[i + 1].x;
+		 		this.snake[i].y = this.snake[i + 1].y;
+		 	}
+        	//设置蛇头向前的下一个坐标
+        	this.snake[this.snake.length-1].x += this.x;
+        	this.snake[this.snake.length-1].y += this.y;
+        }
+        //更新绘制蛇
+        Tcs.prototype.gxtcsst = function(){
+//      	把最后一个清除
+        	this.context.clearRect(this.snake[0].x,this.snake[0].y,this.space,this.space);
+//      	重新绘制地图、更新下一步坐标
+        	this.move();
+        	this.dt();
+        	//重新绘制蛇身
+        	for(var j = 0 ; j<this.snake.length;j++){
+				this.context.beginPath();
+				this.context.fillStyle = this.snake[j].color;
+				this.context.fillRect(this.snake[j].x,this.snake[j].y,this.space,this.space);
+				this.context.fill();
+			}
+        	//随时更新坐标是否吃到食物
+        	this.eatfood();
+        	//随时更新坐标是否撞边
+        	this.fanwei();
+        }  
+        //开启暂停定时器
+       	 Tcs.prototype.btne = function(a){
+			self = this;
+			if(a==true){
+				this.timer = setInterval(function(){	
+				self.gxtcsst();
+				btn.innerHTML = '暂停'
+			},150)
+			}
+			if(a==false){	
+				btn.innerHTML = '开始'
+				clearInterval(this.timer);
+			}
+		}
+       	//检测蛇和食物的碰撞
+       	Tcs.prototype.eatfood = function(){
+       		if(this.snake[this.snake.length-1].x==this.foo.x &&
+       		   this.snake[this.snake.length-1].y==this.foo.y){
+       			console.log("a");
+       			//分数自加
+       			fen.innerHTML = Number(fen.innerHTML) + 1;
+       			//蛇尾添加
+       			var newst = {
+       				x:this.snake[0].x-this.space,
+       				y:this.snake[0].y-this.space,
+       				color:'blue'
+       			}
+       			this.snake.unshift(newst);
+       			//创建新食物
+       			this.foo = {
+       				x:Math.floor(Math.random()*this.colCount)*this.space,
+       				y:Math.floor(Math.random()*this.rowCount)*this.space,
+       				color:'red'
+       			}
+       			this.context.beginPath();
+				this.context.rect(this.foo.x, this.foo.y, this.space, this.space);
+				this.context.fillStyle = this.foo.color;
+				this.context.fill();
+       		}
+       	}
+       	 //设置范围
+       	 Tcs.prototype.fanwei = function(){
+			//记录蛇头
+			var snakeHead = this.snake[this.snake.length - 1];
+			if(snakeHead.x  < 0 || snakeHead.x > this.width-this.space ||
+				snakeHead.y < 0 || snakeHead.y > this.height-this.space){
+				var btn = document.getElementById("btn");
+				clearInterval(this.timer);
+				fen.innerHTML = 0;
+				newbtn.style.display = 'block';
+			}
+	}
+       	 //重新开始
+       	 newbtn.onclick = function(){
+       	 	newbtn.style.display = 'none';
+       	 	a = false;
+       	 	tcs.direction = 'right';
+            context.clearRect(0,0,tcs.width,tcs.height);
+       	 	btn.innerHTML = '开始';
+       	 	tcs.init();
+       	 }
+         //初始化
+		Tcs.prototype.init = function(){
+			this.dt();
+			this.tcsst();
+			this.food();
+		}
+		tcs.init();
+        //点击开始
+		btn.onclick = function(){
+			a = !a;
+			tcs.keydown();
+			tcs.btne(a);
+		}
+	</script>
+</html>

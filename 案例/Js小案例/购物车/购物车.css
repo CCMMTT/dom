@@ -1,0 +1,158 @@
+body{
+    padding: 0;
+    margin:0;
+}
+.gouwu{
+    width:800px;
+    margin:0 auto;
+    border:1px solid #000;
+    margin-top:50px;
+}
+.wp{
+    overflow: hidden;
+    width:700px;
+    height:80px;
+    margin:0 auto;
+    margin-top:10px;
+    border:1px solid #000;  
+}
+.wp input{
+    float:left;
+    width: 30px;
+    height:30px;
+
+    cursor: pointer;
+}
+.img{
+    float:left;
+    width: 100px;
+    height:70px;
+    margin-top:5px;
+    margin-left:5px;
+    background-color: blue;
+}
+.zi{
+    float: left;
+    width: 130px;
+    height:70px;
+    margin-left:5px;
+    margin-top:5px;
+}
+.zi .mz{
+   text-align: center;
+   margin-top:5px;
+}
+.dj{
+   text-align: center;
+   overflow: hidden;
+   margin-left: 20px;
+   margin-top:10px;
+  
+}
+.dj1{
+    cursor: pointer;
+    display: inline-block;
+    padding:0 7px;
+    text-align: center;
+}
+.zhi{
+    display: inline-block;
+    box-sizing: border-box;
+    content: "";
+   
+}
+.dj2{
+    cursor: pointer;
+    display: inline-block;
+    padding:0 5px;
+    text-align: center;
+}
+.danjia{
+    float:left;
+    width: 100px;
+    height:30px;
+    margin-top:25px;
+    margin-left:20px;
+}
+.zonjia{
+    float:left;
+    width: 140px;
+    height:30px;
+    margin-top:25px;
+    margin-left:20px;
+}
+.sc{
+    float: left;
+   cursor: pointer;
+   padding:5px 10px;
+   text-align: center;
+   margin-top:20px
+}
+.gn{
+    overflow: hidden;
+    width: 700px;
+    margin:0 auto;
+    height:120px;
+    margin-top:5px;
+}
+.gn .qx{
+    float:left;
+    width: 60px;
+    height:30px;
+    margin-top:45px;
+    margin-left:10px;
+}
+.gn .qx input{
+    width:20px;
+    height:20px;
+    cursor: pointer;
+}
+.gn .qbx input{
+    width:20px;
+    height:20px;
+    cursor: pointer;
+}
+.gn .qbx{
+    float:left;
+    width: 80px;
+    height:30px;
+    margin-top:45px;
+    margin-left:10px;
+}
+.qsc{
+    float: left;
+    margin-top:43px;
+    margin-left:40px;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+.tj{
+    float: left;
+    margin-top:43px;
+    margin-left:220px;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+.qszi{
+    float: left;
+    margin-top:43px;
+    margin-left:10px;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+.fool{
+	overflow: hidden;
+	padding:20px;
+}
+.fooldiv{
+	float:left;
+	margin-left:50px;
+	margin-top:7px;
+}
+.foolipt{
+	float:left;
+}
+.foolipt input{
+	width:20px;
+	height:20px;
+}

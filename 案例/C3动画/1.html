@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style type="text/css">
+.big{
+    width: 100px;
+    height: 100px;
+    margin: 200px auto;
+    perspective: 400px;
+}
+.boxbig{
+    width: 200px;
+    height: 200px;
+    position: relative;
+    transform-style: preserve-3d;
+    animation: r 7s infinite;
+}
+
+.box{
+    width: 100px;
+    height: 100px;
+    position: absolute;
+    left:0;
+    right:0;
+    top:0;
+    bottom:0;
+    margin:auto;
+    line-height: 100px;
+    text-align: center; 
+}
+.top{
+    background-color: rgba(250,0,150,1);
+    transform: translateY(-50px) rotateX(90deg);
+}
+.bottom{
+    background-color: rgba(0,0,255,1);
+    transform: translateY(50px) rotateX(90deg);
+}
+.right{
+    background-color: rgba(247, 8, 40, 1);
+    transform: translateX(-50px) rotateY(90deg);
+}
+.left{
+    background-color: rgba(150,150,255,1);
+    transform: translateX(50px) rotateY(90deg);
+}
+.back{
+    background-color: rgba(255,255,0,1);
+    transform: translateZ(-50px);
+}
+.front{
+    background-color: rgba(0,250,0,1);
+    transform: translateZ(50px);
+}
+
+.tbox{
+    width: 200px;
+    height: 200px;
+    position: absolute;
+    text-align: center;
+    transition: all 1s;
+   
+}
+.ttop{
+    background-color: rgba(130,120,0,.3);
+    transform: translateY(-100px) rotateX(90deg);
+}
+.tbottom{
+    background-color:  rgba(253, 128, 4, 0.3);
+    transform: translateY(100px) rotateX(90deg);
+}
+.tright{
+    background-color:  rgba(213, 250, 7, 0.3);
+    transform: translateX(-100px) rotateY(-90deg);
+}
+.tleft{
+    background-color:  rgba(255,13,120,.3);
+    transform: translateX(100px) rotateY(-90deg);
+}
+.tback{
+    background-color:  rgba(7, 248, 27, 0.3);
+    transform: translateZ(-100px);
+}
+.tfront{
+    background-color:  rgba(6, 212, 248, 0.3);
+    transform: translateZ(100px);
+}
+
+@keyframes r{
+    0%{
+        transform: rotateY(0deg);
+    }
+    50%{
+        transform: rotateY(180deg) ;
+    }
+    100%{
+        transform: rotateY(360deg) ;
+    }
+}
+
+.boxbig:hover .ttop{
+    transform: translateY(-150px) rotateX(90deg);
+}
+.boxbig:hover.tbottom{
+    transform: translateY(150px) rotateX(90deg);
+}
+.boxbig:hover .tright{
+    transform: translateX(-150px) rotateY(-90deg);
+}
+.boxbig:hover .tleft{
+    transform: translateX(150px) rotateY(-90deg);
+}
+.boxbig:hover .tback{
+    transform: translateZ(-150px);
+}
+.boxbig:hover .tfront{
+    transform: translateZ(150px);
+}
+
+
+</style>
+</head>
+
+<body>
+    	<div class="big">
+                <div class="boxbig">
+                
+                    <div class="box top"></div>
+                    <div class="box bottom"></div>
+                    <div class="box right">右</div>
+                    <div class="box left">左</div>
+                    <div class="box back">正</div>
+                    <div class="box front">反</div>
+
+                    <div class="tbox ttop"></div>
+                    <div class="tbox tbottom"></div>
+                    <div class="tbox tright"></div>
+                    <div class="tbox tleft"></div>
+                    <div class="tbox tback"></div>
+                    <div class="tbox tfront"></div>
+                
+                </div> 
+                </div>
+               
+</body>
+</html>

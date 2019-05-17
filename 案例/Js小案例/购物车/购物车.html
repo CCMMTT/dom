@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<link rel="stylesheet" href="./购物车.css" />
+	<link rel="stylesheet" href="./购物车.json" />
+	<body>
+		   <div class = "gouwu">
+           <div class="fool">
+           	<div class="foolipt">
+           		<input class="anxia" type="checkbox" >全选/全部不选
+           	</div>
+           	<div class="fooldiv">总价：<span>$</span><span class="foolp">0</span></div>
+           </div>
+     </div>
+	</body>
+	
+	
+	<script src="./jquery-3.3.1.min.js"></script>
+	<script>
+		var gouwu = document.querySelector(".gouwu");
+		var fool = document.querySelector(".fool");
+		$.ajax({
+			type:'GET',
+			dataType:'json',
+			url:'./购物车.json',
+			success:function(d){
+				var da = d.data;
+				for(var i = 0 ; i <da.length ; i++ ){
+					var di = document.createElement("div");
+					di.class = 'wp a';
+				   di.innerHTML = '<div class="wp a">'+
+			       '<input type="checkbox" class="ipt">'+
+			       '<div class="img"></div>'+
+			       '<div class="zi">'+
+			           '<div class="mz">'+da[i].name+'</div>'+
+			           '<div class="dj">'+
+			           ' <input  type="button"  class="dj1" value="-">'+
+            			'<input class="zhi" type="text" value="1">'+
+           				 '<input type="button"  class="dj2" value="+">'+
+			           '</div>'+
+			       '</div>'+
+			       '<div  class="danjia">单价：<span class="danjiaa">'+da[i].price+'</span><span>&yen;</span></div>'+
+			       '<div class="zonjia">商品总价<span class="zonjiaa">'+da[i].price+'</span><span>&yen;</span></div>'+
+			       '<button id="sc1" class="sc">删除</button>'+
+                     '</div>'
+                     gouwu.insertBefore(di,fool);
+				}
+				
+				var dj1 = document.querySelectorAll(".dj1");  //-
+                var dj2 = document.querySelectorAll(".dj2");  //+
+                var sc = document.querySelectorAll(".sc");    //删除
+                var zhi = document.querySelectorAll(".zhi");  //数量
+                var zonjiaa = document.querySelectorAll(".zonjiaa") //总价
+                var ipt = document.querySelectorAll(".ipt");
+                 var anxia = document.querySelector(".anxia");
+                  var foolp = document.querySelector(".foolp");
+               
+                //-
+               for(var i = 0;i<dj1.length;i++){
+               	dj1[i].onclick = function(){
+               		this.nextSibling.value>=1?this.nextSibling.value--:0
+               		var ba = this.parentNode.parentNode.parentNode;
+               		danjia = ba.querySelector(".danjia>.danjiaa").innerHTML;
+               		ba.querySelector(".zonjia>.zonjiaa").innerHTML = Number(danjia) *Number(this.nextSibling.value);
+               		var d = ba.querySelector(".ipt");
+					if(d.checked){
+						var sum = 0;
+						for(var f =0;f<ipt.length;f++){
+						if(ipt[f].checked){				
+             			var ba = ipt[f].parentNode;
+             			var zj = ba.querySelector(".zonjia>.zonjiaa").innerHTML;
+             			sum = sum + Number(zj); 
+             			foolp.innerHTML = sum;
+						}
+						}
+					}
+               		
+               	}
+               }
+				//+
+				for(var j = 0; j <dj2.length;j++){
+					dj2[j].onclick = function(){
+					this.previousSibling.value++;
+					var ba = this.parentNode.parentNode.parentNode;
+               		danjia = ba.querySelector(".danjia>.danjiaa").innerHTML;
+               		ba.querySelector(".zonjia>.zonjiaa").innerHTML = Number(danjia) *Number(this.previousSibling.value);
+					var d = ba.querySelector(".ipt");
+					if(d.checked){
+						var sum = 0;
+						for(var f =0;f<ipt.length;f++){
+						if(ipt[f].checked){				
+             			var ba = ipt[f].parentNode;
+             			var zj = ba.querySelector(".zonjia>.zonjiaa").innerHTML;
+             			sum = sum + Number(zj); 
+             			foolp.innerHTML = sum;
+						}
+						}
+					}
+					}	
+				}
+              //删除
+              for(var k = 0; k<sc.length;k++){
+              	sc[k].onclick = function(){
+              		 var ba = this.parentNode.parentNode;
+              		var d = ba.querySelector(".ipt");
+	                var ipt = document.querySelectorAll(".ipt");
+	                if(d.checked){
+	                	var a = Number(foolp.innerHTML);
+	                	var za = ba.querySelector(".zonjia>.zonjiaa").innerHTML;
+	                	foolp.innerHTML = a - Number(za);
+	                }
+                   if(ipt.length==1){
+                   	anxia.checked = false;
+                   }
+              		ba.remove();
+              	}
+              }
+              //输入框
+              for(var h = 0;h<zhi.length;h++){
+              	zhi[h].oninput = function(){
+              	var ba = this.parentNode.parentNode.parentNode;
+              	danjia = ba.querySelector(".danjia>.danjiaa").innerHTML;
+              	var re = /^[0-9]{1,3}$/ ;
+					var ff = re.test(+this.value)
+					if(ff){
+						ba.querySelector(".zonjia>.zonjiaa").innerHTML = Number(danjia) * Number(this.value);
+						var ba = this.parentNode.parentNode.parentNode;
+                		var d = ba.querySelector(".ipt");
+						if(d.checked){
+						var sum = 0;
+						for(var f =0;f<ipt.length;f++){
+						if(ipt[f].checked){		
+             			var ba = ipt[f].parentNode;
+             			var za = ba.querySelector(".zonjia>.zonjiaa").innerHTML;
+             			sum = sum + Number(za); 
+             			foolp.innerHTML = sum;
+						}
+						}
+					}
+					
+					}else{
+					this.value = 0;
+					ba.querySelector(".zonjia>.zonjiaa").innerHTML = Number(danjia) * Number(this.value);
+					var ba = this.parentNode.parentNode.parentNode;
+                		var d = ba.querySelector(".ipt");
+						if(d.checked){
+						var sum = 0;
+						for(var f =0;f<ipt.length;f++){
+						if(ipt[f].checked){		
+             			var ba = ipt[f].parentNode;
+             			var za = ba.querySelector(".zonjia>.zonjiaa").innerHTML;
+             			sum = sum + Number(za); 
+             			foolp.innerHTML = sum;
+						}
+						}
+					}
+						
+					}
+              	}
+              }
+              //fool 全选
+             anxia.onclick = function(){
+             var ipt = document.querySelectorAll(".ipt");
+             for(var f=0;f<ipt.length;f++){
+                if(anxia.checked){
+                	ipt[f].checked = anxia.checked;
+                	var sum = 0;
+						for(var r =0;r<ipt.length;r++){
+						if(ipt[r].checked){		
+             			var ba = ipt[r].parentNode;
+             			var za = ba.querySelector(".zonjia>.zonjiaa").innerHTML;
+             			sum = sum + Number(za); 
+             			foolp.innerHTML = sum;
+						}
+						}
+                }else{
+                	ipt[f].checked = anxia.checked;
+                	foolp.innerHTML = 0;
+                }
+						
+					}
+             }
+             
+             //全选为真
+              var sum = 0;
+            for(let f=0;f<ipt.length;f++){
+              	ipt[f].onchange = function(){
+              		 if(ipt[f].checked){
+             			var ba = this.parentNode.parentNode;
+             			var zj = ba.querySelector(".zonjia>.zonjiaa").innerHTML;
+                        var p = foolp.innerHTML;
+             			foolp.innerHTML = Number(zj)+Number(p);
+             		}else{
+             			var ba = this.parentNode.parentNode;
+             			var zj = ba.querySelector(".zonjia>.zonjiaa").innerHTML;
+                        var p = foolp.innerHTML;
+             			foolp.innerHTML =Number(p)- Number(zj);
+             		}
+              		 
+              		for(var m=0;m<ipt.length;m++){
+              			if(!ipt[m].checked){
+                        anxia.checked = false;
+              				return;
+              			}
+              			anxia.checked = true;
+              			
+              		}
+              	}
+             }
+       
+            
+			}
+		})
+	</script>
+	
+</html>
